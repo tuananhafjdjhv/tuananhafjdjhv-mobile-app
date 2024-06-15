@@ -7,7 +7,7 @@ class UserService {
   static async login(username, password) {
     try {
       const response = await axios.post(
-        `${UserService.BASE_URL}/api.example.com/v1/auth/sign-in`,
+        `${UserService.BASE_URL}/auth/sign-in`,
         { username, password }
       );
       return response.data;
@@ -16,32 +16,29 @@ class UserService {
     }
   }
 
-  static async register(userData, token) {
+  static async register(userData) {
     try {
       const response = await axios.post(
-        `${UserService.BASE_URL}/auth/register`,
+        `${UserService.BASE_URL}/auth/sign-up`,
         userData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
       );
       return response.data;
     } catch (err) {
-      throw err;
+      toast.error("Đăng kí thất bại");
     }
   }
 
   static async getAllUsers(token) {
     try {
       const response = await axios.get(
-        `${UserService.BASE_URL}/admin/get-all-users`,
+        `${UserService.BASE_URL}/admin/list`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
       return response.data;
     } catch (err) {
-      throw err;
+      toast.error("Không thể tải danh sách người dùng");
     }
   }
 
@@ -55,7 +52,7 @@ class UserService {
       );
       return response.data;
     } catch (err) {
-      throw err;
+      toast.error("Không thể tải Profile");
     }
   }
 
@@ -69,7 +66,7 @@ class UserService {
       );
       return response.data;
     } catch (err) {
-      throw err;
+      toast.error("Không có thông tin người dùng");
     }
   }
 
@@ -83,7 +80,7 @@ class UserService {
       );
       return response.data;
     } catch (err) {
-      throw err;
+      toast.error("Không thể xóa thông tin người dùng");
     }
   }
 
@@ -98,7 +95,7 @@ class UserService {
       );
       return response.data;
     } catch (err) {
-      throw err;
+      toast.error("Lỗi! Không upate được thông tin");
     }
   }
 

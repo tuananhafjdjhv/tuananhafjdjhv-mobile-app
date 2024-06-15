@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useState } from "react";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserService from "../service/UserService";
+import { Sidebar } from "./Sidebar";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -35,12 +36,16 @@ const Login = () => {
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
-  const googleLogin = ()=>{
-    const res = axios.post("http://localhost:8080/oauth2/authorization/google").then(res => console.log(res));
-  }
+  const googleLogin = () => {
+    const res = axios
+      .post("http://localhost:8080/oauth2/authorization/google")
+      .then((res) => console.log(res));
+  };
 
   return (
-    <div className="flex items-center justify-center h-screen w-full px-5 sm:px-0">
+    <>
+    {/* <Sidebar></Sidebar> */}
+      <div className="flex items-center justify-center h-screen w-full px-5 sm:px-0">
       <div className="flex bg-white rounded-lg shadow-lg border overflow-hidden max-w-sm lg:max-w-4xl w-full">
         <div
           className="hidden md:block lg:w-1/2 bg-cover bg-blue-700"
@@ -49,7 +54,7 @@ const Login = () => {
           }}
         ></div>
         <div className="w-full p-8 lg:w-1/2">
-          <p className="text-xl text-gray- text-center">Welcome back!</p>
+          <p className="text-3xl text-gray- text-center">ようこそ </p>
           <div className="mt-4 ">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Username
@@ -134,7 +139,7 @@ const Login = () => {
             </button>
           </div>
           <a
-          onClick={()=>googleLogin()}
+            onClick={() => googleLogin()}
             href="http://localhost:8080/oauth2/authorization/google"
             className=" flex items-center justify-center mt-4 text-white rounded-lg shadow-md hover:bg-gray-100"
           >
@@ -202,30 +207,15 @@ const Login = () => {
               href="#"
               className="text-xs text-gray-500 capitalize text-center w-full"
             >
-              Don&apos;t have any account yet?
-              <span className="text-blue-700"> Sign Up</span>
+              Don&apos;t have any account yet? 
+              <Link className="text-blue-700" to={"/tuananhafjdjhv-mobile-app/register"}> Sign Up</Link>
             </a>
           </div>
         </div>
       </div>
     </div>
-    // <div className="bg-[#0e387a] h-screen mx-auto'">
-    //         <h1 className='text-center text-3xl text-[#9fafca] hover:text-[#b8df10] font-extrabold pt-10 pb-10'>Sign In Form</h1>
-    //         {/* {error ?(<div>{error}</div>):('')} */}
-    //         <form className="max-w-sm mx-auto w-full" >
-    //             <div className="flex flex-col pt-10">
-    //                 <label htmlFor="email" className="text-white">Username</label>
-    //                 <input type="text"  className="border-none mb-3 rounded-md" onChange={e => setEmail(e.target.value)} value={email}/>
-    //                 <label htmlFor="password" className="text-white">Password</label>
-    //                 <div className="relative">
-    //                     <input type={showPassword ? "text" : "password"}  className="rounded-md border-none pr-48" onChange={e => setPassword(e.target.value)} value={password}/>
-    //                     <button type="button" className="absolute inset-y-0 right-0 pr-2 flex items-center" onClick={toggleShowPassword}> {showPassword ? <i className="fas fa-eye-slash fa-2x"></i> : <i className="fas fa-eye fa-2x"></i>} </button>
-    //                 </div>
-    //                 <button type="submit" className="rounded-full text-lg leading-4 font-medium bg-blue-500 hover:bg-sky-700 h-8 mt-5 text-white" onClick={handleSubmit}>Sign In</button>
-    //             </div>
-    //         </form>
-
-    //     </div>
+    </>
+    
   );
 };
 export default Login;
